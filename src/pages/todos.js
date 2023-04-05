@@ -4,6 +4,7 @@
 import {useEffect, useState} from "react";
 import TodoItem from "@/js/todoItem";
 import styles from '@/styles/TodoApp.module.css'
+import { flushSync } from "react-dom";
 
 const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
 
@@ -12,6 +13,7 @@ const userId = '1';
 export default function TodoPage() {
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
+    const [loading, setLoading] = useState(true);
 
    async function addUser(name, id)
    {
@@ -98,6 +100,13 @@ export default function TodoPage() {
         headers: { "x-apikey": APIKEY},
     });
     await response
+   }
+
+   if(loading)
+   {
+    return (
+        <span>loading....</span>
+    )
    }
 
     return (

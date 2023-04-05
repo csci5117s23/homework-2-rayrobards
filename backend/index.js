@@ -64,8 +64,35 @@ async function clearTodoList(req, res){
     }
 }
 
+app.get('/test', (req, res) => {
+    res.json({"test": "test"})
+})
+
+import { date, object, string } from 'yup';
+// const flashCardYup = object({
+//     front: string().required(),
+//     back: string().required(),
+//     category: string().required(),
+//     createdOn: date().default(() => new Date()),
+// })
+// crudlify(app, {flashCard: flashCardYup})
+
+const todoItemYup = object({
+    userId: string().required(),
+    text: string().required(),
+    category: string().required(),
+    createdOn: date().default(() => new Date()),
+})
+
+const userYup = object({
+    username: string().required()
+})
+
+// crudlify(app, {todos: todoItemYup, users: userYup})
+crudlify(app, {users: userYup})
+
 // Use Crudlify to create a REST API for any collection
-crudlify(app)
+//crudlify(app)
 
 // bind to serverless runtime
 export default app.init();
