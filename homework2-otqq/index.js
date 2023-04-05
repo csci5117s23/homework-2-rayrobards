@@ -6,50 +6,63 @@
 import {app, Datastore} from 'codehooks-js'
 import {crudlify} from 'codehooks-crudlify'
 
-app.post('/addUser', async (req, res) => {
-    console.log("add")
-    const db = await Datastore.open();
+app.post('/user', addUser);
 
-    const user = {
-        items:[
-            {
-                text:"user2",
-                done: false
-            }
-        ]
-    }
+async function addUser(req, res) {
+    const db = await Datastore.open()
+    await db.insertOne('user', req.body);  
+    res.status(201)
+}
+app.get('/user', getUser);
 
-    await db.set(req.query.user, JSON.stringify(user));
-    res.status(201);
+async function getUser(req, res) {
+    const db = await Datastore.open()
+    const id = req.query.id;
+    const data = await db.getOne('user', String(id));  
+    res.json(data);
+}
 
-})
+app.post('/todo', addTodoItem);
 
-app.get('/getUser', async (req, res) => {
-    const db = await Datastore.open();
-
-    const userData = await db.get(req.query.user);
-    res.json(userData)
-})
-
-app.post('/addTodoItem', async (req, res) => {
-    const db = await Datastore.open();
-    const bodyString = JSON.stringify(req.body)
-    const bodyJSON = JSON.parse(bodyString);
-
-    const userData = await db.get(bodyJSON.user)
-    // let test2 = userData.items
-    // let userDataString = JSON.stringify(test2);
-    // let test = JSON.parse(userDataString);
-    
-    let userDataString = JSON.parse(userData);
-    let test = userDataString.items
-    test.push(({"test": "test2", "done": false}));
-
-    await db.set('1', bodyJSON.item);
-
-    //itemsArr.push({"test": "test2", "done": false})
+async function addTodoItem(req, res) {
+    const db = await Datastore.open()
+    await db.insertOne('todo', req.body);
+    let test = JSON.stringify(req.body); 
     res.json(test);
-})
+}
+
+app.get('/todoCount,', countTodoItems);
+
+async function countTodoItems(req, res) {
+    const db = await Datastore.open();
+    let count = await db.getMany('todo')
+    res.json(count);
+}
+
+app.get('/todo', getTodoItems);
+
+async function getTodoItems(req, res) {
+    const db = await Datastore.open();
+    const query = {'userId': req.query.id}
+    let todoItems = await db.getArray('todo', {filter: query});
+    if(todoItems.length === 0)
+    {
+        res.json({"empty": true}); 
+    }
+    else {
+        res.json(todoItems)
+    }
+}
+
+app.delete('/clearTodo', clearTodoList) 
+
+async function clearTodoList(req, res){
+    {
+        const db = await Datastore.open();
+        await db.removeMany('todo');
+        res.json(201);
+    }
+}
 
 // Use Crudlify to create a REST API for any collection
 crudlify(app)
