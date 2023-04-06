@@ -8,7 +8,6 @@ const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
 const BASEURL = "https://homework2-otqq.api.codehooks.io/dev"
 
 export default function TodoItem(item) {
-
     let data = item.item;
     async function changeStatus()
     {
@@ -27,6 +26,12 @@ export default function TodoItem(item) {
         });
         let res = await response.json();
     }
+    let text = data.text;
+    if(data.text.length >= 55)
+    {
+        text = data.text.slice(0, 55);
+        text = text.concat('...');
+    }
 
     return (
         <div className="todoItemContainer">
@@ -35,8 +40,8 @@ export default function TodoItem(item) {
                 {data.status && (<FontAwesomeIcon className="statusCircle" icon={filledCircle} />)}
             </button>
             <Link className="todoText" href={`/todo?id=${data._id}`}>
-                <div>
-                    <p>{data.text}</p>
+                <div>                
+                    <p id="todoParagraph">{text}</p>
                 </div>
             </Link>
         </div>
