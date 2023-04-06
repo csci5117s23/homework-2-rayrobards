@@ -8,9 +8,11 @@ const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
 const BASEURL = "https://homework2-otqq.api.codehooks.io/dev"
 
 export default function TodoItem(item) {
+    const [buttonStyle, setButtonStyle] = useState(unfilledCircle);
     let data = item.item;
     async function changeStatus()
     {
+        setButtonStyle(filledCircle)
         const update = {
             "status": !data.status,
             "createdOn": data.createdOn,
@@ -26,18 +28,34 @@ export default function TodoItem(item) {
         });
         let res = await response.json();
     }
+
+    function hoverStyle() {
+        console.log("hover");
+        setButtonStyle(filledCircle);
+    }
+
+    function nonHoverStyle() {
+        setButtonStyle(unfilledCircle);
+    }
+    if(data.status)
+    {
+        setButtonStyle(filledCircle)
+    }
+    
     let text = data.text;
-    if(data.text.length >= 55)
+    if(text === undefined)
+    {
+        text = "";
+    }
+    if(text.length >= 55)
     {
         text = data.text.slice(0, 55);
         text = text.concat('...');
     }
-
     return (
         <div className="todoItemContainer">
             <button onClick={changeStatus} className="statusCircleButton">
-                {!data.status && (<FontAwesomeIcon className="statusCircle" icon={unfilledCircle} />)}
-                {data.status && (<FontAwesomeIcon className="statusCircle" icon={filledCircle} />)}
+                <FontAwesomeIcon onMouseOver={hoverStyle} onMouseOut={nonHoverStyle} className="statusCircle" icon={buttonStyle} />
             </button>
             <Link className="todoText" href={`/todo?id=${data._id}`}>
                 <div>                
