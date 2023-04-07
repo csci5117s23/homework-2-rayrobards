@@ -30,16 +30,11 @@ export default function TodoItem(item) {
     }
 
     function hoverStyle() {
-        console.log("hover");
         setButtonStyle(filledCircle);
     }
 
     function nonHoverStyle() {
         setButtonStyle(unfilledCircle);
-    }
-    if(data.status)
-    {
-        setButtonStyle(filledCircle)
     }
     
     let text = data.text;
