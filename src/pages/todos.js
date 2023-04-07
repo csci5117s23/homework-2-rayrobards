@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import TodoItem from "@/js/todoItem";
 import styles from '@/styles/TodoApp.module.css'
-import { flushSync } from "react-dom";
 import Head from 'next/head'
 
 const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
@@ -58,7 +57,7 @@ export default function TodoPage() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className='todoPageContainer'>
-                <div className="todoHeader">
+                <div className="pageHeader">
                         <span>TODO</span>
                 </div>
                 <div className="todoItems">
