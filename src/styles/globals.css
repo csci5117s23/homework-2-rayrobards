@@ -90,3 +90,73 @@ body {
   background-color: cornflowerblue;
 }
 
+.todoItemPageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.nonEditText {
+  margin-top: 3rem;
+  width: 50%;
+  min-height: 50%;
+  background-color: aliceblue;
+  border: .4rem solid cornflowerblue;
+  border-radius: .5rem;
+  padding-left: 1rem;
+  font-size: 1.2rem;
+}
+
+.editText {
+  margin-top: 3rem;
+  width: 50%;
+  min-height: 50%;
+  background-color: aliceblue;
+  border: .4rem solid red;
+  border-radius: .5rem;
+  padding-left: .8rem;
+}
+
+.todoItemTextInput {
+  width: 99%;
+  height: 94%;
+  resize: none;
+  background-color: aliceblue;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 1.2rem;
+  padding-top: 1.2rem;
+  border: 0px;
+  outline: none;
+}
+
+.todoItemButtonsContainer {
+  display: flex;
+  width: 50vw;
+}
+
+.todoItemButton {
+  display: flex;
+  margin-top: 1rem; 
+  width: 5rem;
+  min-width: 5rem;
+  height: auto; 
+  border: none; 
+  cursor: pointer;
+  background-color: aliceblue;
+  padding: 1rem;
+  border-radius: .5rem;
+  margin-left: 2rem;
+}
+
+.todoItemButton:hover {
+  background-color: cornflowerblue;
+}
+
+.buttonIcon {
+  width: 100%;
+  height: auto;
+}
+
+
