@@ -2,7 +2,6 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faFloppyDisk, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
-import Link from 'next/link'
 import Head from 'next/head'
 import { updateTodoItem, getTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
@@ -15,7 +14,7 @@ export default function TodoItem() {
     const [updatedText, setUpdatedText] = useState("");
     const [isVisible, setVisibility] = useState(false);
     const router = useRouter();
-    const {getToken } = useAuth()
+    const {getToken, userId } = useAuth()
 
     useEffect(() => {
         if (!userId) {
