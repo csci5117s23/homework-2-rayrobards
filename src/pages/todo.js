@@ -6,12 +6,14 @@ import Link from 'next/link'
 import Head from 'next/head'
 import { updateTodoItem, getTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
-
+import { TailSpin } from 'react-loading-icons'
 export default function TodoItem() {
     const [editing, setEditing] = useState(false);
     const [todoItem, setTodoItem] = useState({});
     const [loading, setLoading] = useState(true);
+    const [saveLoading, setSaveLoading] = useState(false);
     const [updatedText, setUpdatedText] = useState("");
+    const [isVisible, setVisibility] = useState(false);
     const router = useRouter();
     const {getToken } = useAuth()
 
@@ -47,7 +49,13 @@ export default function TodoItem() {
         }
 
         const token = await getToken({template: "codehooks"});
+        setSaveLoading(true);
         await updateTodoItem(token,todoItem._id, update);
+        setSaveLoading(false);
+        setVisibility(true);
+        setTimeout(() => {
+            setVisibility(false);
+        }, 3000)
     }
 
     if(loading)
@@ -85,6 +93,16 @@ export default function TodoItem() {
                 {editing && (<button className="todoItemButton" onClick={saveEdit} title="Save Edit">
                     <FontAwesomeIcon icon={faFloppyDisk} className="buttonIcon"/>
                 </button>)}
+            </div>
+            <div>
+                {saveLoading && (
+                    <TailSpin stroke="#000000" fill="#000000" strokeOpacity={1} />
+                )}
+                {isVisible && (
+                    <div className="editConfirmation">
+                        <p>Edit Successful</p>
+                    </div>
+                )}
             </div>
         </div>
         </>

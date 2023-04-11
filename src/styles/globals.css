@@ -161,4 +161,17 @@ body {
   height: auto;
 }
 
+.editConfirmation {
+  width: 40vw;
+  background-color: lightgreen;
+  padding: .2rem;
+  border-radius: 3rem;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.editConfirmation p {
+  font-size: 2rem;
+}
+
 
