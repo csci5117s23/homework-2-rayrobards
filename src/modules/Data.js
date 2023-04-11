@@ -20,7 +20,6 @@ export async function getDoneTodoItems(authToken, userId) {
 
 //add todoitem to db
 export async function addTodoItem(authToken, todoItem) {
-    console.log("add todo")
     const response = await fetch(`${BASEURL}/todos`, {
         method: "POST",
         headers: { 'Authorization': 'Bearer ' + authToken, "Content-Type": "application/json"},
@@ -37,4 +36,23 @@ export async function updateTodoItem(authToken, todoId, updatedJson) {
         body: JSON.stringify(updatedJson)
     });
     return await response
+}
+
+//add username to db
+export async function addUser(authToken, user) {
+    const response = await fetch(`${BASEURL}/users`, {
+        method: "POST",
+        headers: { 'Authorization': 'Bearer ' + authToken, "Content-Type": "application/json"},
+        body: JSON.stringify(user)
+    });
+    return await response;
+}
+
+//get single todo item by id
+export async function getTodoItem(authToken, todoId) {
+    const response = await fetch(`${BASEURL}/todos?_id=${todoId}`, {
+        method: "GET",
+        'headers': {'Authorization': 'Bearer ' + authToken}
+    });
+    return await response.json();
 }

@@ -5,19 +5,16 @@ import Head from 'next/head'
 import { getTodoItems, addTodoItem } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 
-const testId = '642dd9fbf1bc7c364d687b6a';
-
 export default function TodoPage() {
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth()
-
     useEffect(()=>{
         async function loadData() {
             if(userId) {
                 const token = await getToken({template: "codehooks"});
-                let data = await getTodoItems(token, testId);
+                let data = await getTodoItems(token, userId);
                 setTodoList(data)
                 setLoading(false);
             }
@@ -29,7 +26,7 @@ export default function TodoPage() {
     async function addItem()
     {
         const todoItem = {
-            "userId": testId, 
+            "userId": userId, 
             "text": newItem, 
             "category": "testing"
         }

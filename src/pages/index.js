@@ -6,6 +6,8 @@ import styles from '@/styles/TodoApp.module.css'
 import Link from 'next/link'
 import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
+import { useAuth } from "@clerk/nextjs";
+import { addUser } from '@/modules/Data'
 import {
   // ClerkProvider,
   SignedIn,
@@ -20,23 +22,50 @@ import {
 
 export default function Home() {
   let router = useRouter()
+  const { isLoaded, isSignedIn, user } = useUser();
+  const {getToken} = useAuth();
+
 
   const [login, setLogin] = useState(false)
 
   function signIn()
   {
-    console.log("click")
     setLogin(true)
   }
 
   function Redirect() {
-    const { user } = useUser();
-    // console.log(user);
-    // addUsertoDB()
-    router.push('/todos')
+      router.push('/todos')
   }
 
-  const publishableKey= process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  async function AddUser()
+  {
+    if(isLoaded)
+    { 
+      //use useuser to get user info such as id, use use auth to get token from clerk
+      const newUser = {
+        "username": user.fullName,
+        "_id":user.id,
+      }
+      const token = await getToken({template: "codehooks"});
+      let res = await addUser(token, newUser);
+      console.log(res);
+    }
+  }
+
+  function AddUser() {
+    async function addUserDB() {
+      if(isLoaded)
+      { 
+        const newUser = {
+          "username": user.fullName,
+          "_id":user.id,
+        }
+        const token = await getToken({template: "codehooks"});
+        await addUser(token, newUser);
+      }
+    }
+    addUserDB();
+  }
 
   return (
     <>
@@ -47,6 +76,7 @@ export default function Home() {
           <link rel="icon" href="/favicon.ico" />
       </Head>
         <SignedIn>
+          <AddUser />
           <Redirect />
         </SignedIn>
         <SignedOut>

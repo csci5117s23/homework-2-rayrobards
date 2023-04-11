@@ -4,8 +4,6 @@ import Head from 'next/head'
 import { getDoneTodoItems } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 
-const testId = '642dd9fbf1bc7c364d687b6a';
-
 export default function DonePage() {
     const [todoList, setTodoList] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -15,7 +13,7 @@ export default function DonePage() {
        async function loadData() {
             if(userId) {
                 const token = await getToken({template: "codehooks"});
-                let data = await getDoneTodoItems(token, testId);
+                let data = await getDoneTodoItems(token, userId);
                 setTodoList(data)
                 setLoading(false);
             }

@@ -4,11 +4,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faFloppyDisk, faArrowLeft} from "@fortawesome/free-solid-svg-icons";
 import Link from 'next/link'
 import Head from 'next/head'
-import { updateTodoItem } from "@/modules/Data";
+import { updateTodoItem, getTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
-
-const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
-const BASEURL = "https://homework2-otqq.api.codehooks.io/dev"
 
 export default function TodoItem() {
     const [editing, setEditing] = useState(false);
@@ -18,24 +15,20 @@ export default function TodoItem() {
     const router = useRouter();
     const {getToken } = useAuth()
 
-    //get the id from the route
-
-
     useEffect(() => {
         //router.isReady prevents query from being undefined on page reload
         //along with adding dependency to the useEffect dependency list
         if(router.isReady){
+            //get the id from the route
             const { id } = router.query;
-            const getTodoItem = async () => {
-                const response = await fetch(`${BASEURL}/todos?_id=${id}`, {
-                    method: "GET",
-                    headers: { "x-apikey": APIKEY}
-                });
-                const data = await response.json();
+
+            async function getItem() {
+                const token = await getToken({template: "codehooks"});
+                let data = await getTodoItem(token, id);
                 setTodoItem(data[0]);
                 setLoading(false);
             }
-            getTodoItem();
+            getItem();
         }
     }, [router.isReady])
 
