@@ -58,13 +58,17 @@ body {
 
 .pageHeader {
   display: flex;
-  width: 100%;
+  width: 100vw;
   height: 10vh;
   background-color: lightblue;
   justify-content: center;
   align-items: center;
   font-size: 3rem;
   color: white;
+}
+
+.pageHeader .userIcon {
+  float: right;
 }
 
 .textBox {

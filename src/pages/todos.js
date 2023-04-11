@@ -1,11 +1,13 @@
 import {useEffect, useState} from "react";
 import TodoItem from "@/components/todoItem";
+import PageHeader from "@/components/header";
 import styles from '@/styles/TodoApp.module.css'
 import Head from 'next/head'
 import { getTodoItems, addTodoItem } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-// import { signOut } from "@/modules/User";
+//import { signOutUser } from "@/modules/User";
+import { UserButton } from "@clerk/clerk-react";
 
 export default function TodoPage() {
     const router = useRouter();
@@ -65,9 +67,8 @@ export default function TodoPage() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className='todoPageContainer'>
-                <div className="pageHeader">
-                        <span>TODO</span>
-                        {/* <button onClick={signOut}>Sign out</button> */}
+                <div>
+                    <PageHeader pageTitle="TODO" />
                 </div>
                 <div className="todoItems">
                     <div>
