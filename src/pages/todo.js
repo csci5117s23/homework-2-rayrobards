@@ -78,6 +78,9 @@ export default function TodoItem() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
         <div className="todoItemPageContainer">
+            <div className="pageHeader">
+                <span>Edit Page</span>
+            </div>
             {!editing && (
                 <div className="nonEditText">
                     <p>{todoItem.text}</p>

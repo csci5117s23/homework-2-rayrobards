@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { getTodoItems, addTodoItem } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-
+import { signOut } from "@/modules/User";
 
 export default function TodoPage() {
     const router = useRouter();
@@ -13,7 +13,7 @@ export default function TodoPage() {
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
-    const { isLoaded, userId, sessionId, getToken } = useAuth()
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     useEffect(() => {
         if (!userId) {
@@ -54,6 +54,7 @@ export default function TodoPage() {
             <span>loading....</span>
         )
    }
+
     return (
         <>
             <Head>
@@ -65,6 +66,7 @@ export default function TodoPage() {
             <div className='todoPageContainer'>
                 <div className="pageHeader">
                         <span>TODO</span>
+                        <button onClick={signOut}>Sign out</button>
                 </div>
                 <div className="todoItems">
                     <div>
