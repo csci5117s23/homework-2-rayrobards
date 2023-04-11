@@ -1,45 +1,43 @@
 import {useEffect, useState} from "react";
-import TodoItem from "@/js/todoItem";
+import TodoItem from "@/components/todoItem";
 import styles from '@/styles/TodoApp.module.css'
 import Head from 'next/head'
+import { getTodoItems, addTodoItem } from "@/modules/Data";
+import { useAuth } from "@clerk/nextjs";
 
-const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
-const BASEURL = "https://homework2-otqq.api.codehooks.io/dev"
-
-const userId = '642dd9fbf1bc7c364d687b6a';
+const testId = '642dd9fbf1bc7c364d687b6a';
 
 export default function TodoPage() {
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
+    const { isLoaded, userId, sessionId, getToken } = useAuth()
 
     useEffect(()=>{
-        const getTodoItems = async () => {
-            const response = await fetch(`${BASEURL}/todos?userId=${userId}&status=${false}&sort=-createdOn`, {
-                method: "GET",
-                headers: { "x-apikey": APIKEY}
-            });
-            const data = await response.json();
-            setTodoList(data);
-            setLoading(false);
+        async function loadData() {
+            if(userId) {
+                const token = await getToken({template: "codehooks"});
+                let data = await getTodoItems(token, testId);
+                setTodoList(data)
+                setLoading(false);
+            }
         }
-        getTodoItems();
-    })
+        loadData();
+    });
+    //TODO; if i mount this, wont reset state when components state changes, bad practice?
 
     async function addItem()
     {
-        setTodoList(todoList.concat(newItem))
         const todoItem = {
-            "userId": userId, 
+            "userId": testId, 
             "text": newItem, 
             "category": "testing"
         }
-        const response = await fetch(`${BASEURL}/todos`, {
-            method: "POST",
-            headers: { "x-apikey": APIKEY, "Content-Type": "application/json"},
-            body: JSON.stringify(todoItem)
-        });
-        let data = await response.json();
+        const updatedTodoList = [todoItem, ...todoList];
+        setTodoList(updatedTodoList);
+        setNewItem("");
+        const token = await getToken({template: "codehooks"});
+        await addTodoItem(token, todoItem);
     }
 
    if(loading)
@@ -63,7 +61,7 @@ export default function TodoPage() {
                 <div className="todoItems">
                     <div>
                         {todoList.map(todos => (
-                            <TodoItem item={todos}></TodoItem>
+                            <TodoItem key={todos.id} item={todos}></TodoItem>
                         ))}
                     </div>
                 </div>

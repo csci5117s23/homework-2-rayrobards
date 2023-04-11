@@ -19,7 +19,7 @@ const userYup = object({
     username: string().required()
 })
 
-app.put('/changeTodoStatus', changeStatus)
+app.put('/updateTodoItem', changeStatus)
 
 async function changeStatus(req, res) {
     const db = await Datastore.open();

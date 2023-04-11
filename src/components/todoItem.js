@@ -2,17 +2,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle as unfilledCircle} from "@fortawesome/free-regular-svg-icons";
 import { faCircle as filledCircle} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { changeTodoStatus } from "@/modules/Data";
 import Link from 'next/link'
-
-const APIKEY = "187e3e0d-9a0b-41bb-823c-8295b0d43779"
-const BASEURL = "https://homework2-otqq.api.codehooks.io/dev"
+import { useAuth } from "@clerk/nextjs";
 
 export default function TodoItem(item) {
     const [buttonStyle, setButtonStyle] = useState(unfilledCircle);
+    const {getToken } = useAuth()
     let data = item.item;
+
     async function changeStatus()
     {
-        setButtonStyle(filledCircle)
         const update = {
             "status": !data.status,
             "createdOn": data.createdOn,
@@ -21,12 +21,8 @@ export default function TodoItem(item) {
             "userId": data.userId,
             "_id": data._id
         }
-        const response = await fetch(`${BASEURL}/changeTodoStatus?_id=${data._id}`, {
-            method: "PUT",
-            headers: { "x-apikey": APIKEY, "Content-Type": "application/json"},
-            body: JSON.stringify(update)
-        });
-        let res = await response.json();
+        const token = await getToken({template: "codehooks"});
+        await updateTodoItem(token, data._id, update);
     }
 
     function hoverStyle() {
