@@ -4,12 +4,23 @@ import styles from '@/styles/TodoApp.module.css'
 import Head from 'next/head'
 import { getTodoItems, addTodoItem } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/router";
+
 
 export default function TodoPage() {
+    const router = useRouter();
+
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth()
+
+    useEffect(() => {
+        if (!userId) {
+            router.push("/");
+          }
+    }, [])
+
     useEffect(()=>{
         async function loadData() {
             if(userId) {

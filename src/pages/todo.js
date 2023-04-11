@@ -18,6 +18,12 @@ export default function TodoItem() {
     const {getToken } = useAuth()
 
     useEffect(() => {
+        if (!userId) {
+            router.push("/");
+          }
+    }, [])
+
+    useEffect(() => {
         //router.isReady prevents query from being undefined on page reload
         //along with adding dependency to the useEffect dependency list
         if(router.isReady){

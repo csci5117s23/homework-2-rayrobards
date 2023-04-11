@@ -3,11 +3,19 @@ import TodoItem from "@/components/todoItem";
 import Head from 'next/head'
 import { getDoneTodoItems } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/router";
 
 export default function DonePage() {
     const [todoList, setTodoList] = useState([]);
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth()
+    const router = useRouter();
+
+    useEffect(() => {
+        if (!userId) {
+            router.push("/");
+          }
+    }, [])
 
     useEffect(()=>{
        async function loadData() {
