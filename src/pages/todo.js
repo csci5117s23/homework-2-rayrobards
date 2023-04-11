@@ -76,11 +76,9 @@ export default function TodoItem() {
                 </div>
             )}
             <div className="todoItemButtonsContainer">
-                <Link href="/todos">
-                    <button className="todoItemButton" title="Back to todos">
-                        <FontAwesomeIcon icon={faArrowLeft} className="buttonIcon"/>
-                    </button>
-                </Link>
+                <button className="todoItemButton" title="Back to todos" onClick={() => router.back()}>
+                    <FontAwesomeIcon icon={faArrowLeft} className="buttonIcon"/>
+                </button>
                 <button className="todoItemButton" onClick={toggleEditing} title="Toggle Editing">
                     <FontAwesomeIcon icon={faPen} className="buttonIcon"/>
                 </button>

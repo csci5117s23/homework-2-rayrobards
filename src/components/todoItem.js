@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle as unfilledCircle} from "@fortawesome/free-regular-svg-icons";
 import { faCircle as filledCircle} from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { changeTodoStatus } from "@/modules/Data";
+import { updateTodoItem } from "@/modules/Data";
 import Link from 'next/link'
 import { useAuth } from "@clerk/nextjs";
 
