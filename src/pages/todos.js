@@ -5,7 +5,7 @@ import Head from 'next/head'
 import { getTodoItems, addTodoItem } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import { signOut } from "@/modules/User";
+// import { signOut } from "@/modules/User";
 
 export default function TodoPage() {
     const router = useRouter();
@@ -14,12 +14,13 @@ export default function TodoPage() {
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth();
-
     useEffect(() => {
-        if (!userId) {
-            router.push("/");
-          }
-    }, [])
+        if(isLoaded) {
+            if (!userId) {
+                router.push("/");
+            }
+        }
+    }, [isLoaded])
 
     useEffect(()=>{
         async function loadData() {
@@ -31,7 +32,7 @@ export default function TodoPage() {
             }
         }
         loadData();
-    });
+    }, [todoList, isLoaded]);
     //TODO; if i mount this, wont reset state when components state changes, bad practice?
 
     async function addItem()
@@ -66,7 +67,7 @@ export default function TodoPage() {
             <div className='todoPageContainer'>
                 <div className="pageHeader">
                         <span>TODO</span>
-                        <button onClick={signOut}>Sign out</button>
+                        {/* <button onClick={signOut}>Sign out</button> */}
                 </div>
                 <div className="todoItems">
                     <div>

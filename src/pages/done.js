@@ -8,14 +8,16 @@ import { useRouter } from "next/router";
 export default function DonePage() {
     const [todoList, setTodoList] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { isLoaded, userId, sessionId, getToken } = useAuth()
+    const { isLoaded, userId, sessionId, getToken } = useAuth();
     const router = useRouter();
 
     useEffect(() => {
-        if (!userId) {
-            router.push("/");
-          }
-    }, [])
+        if(isLoaded) {
+            if (!userId) {
+                router.push("/");
+            }
+        }
+    }, [isLoaded])
 
     useEffect(()=>{
        async function loadData() {

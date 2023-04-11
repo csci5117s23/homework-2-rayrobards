@@ -14,13 +14,15 @@ export default function TodoItem() {
     const [updatedText, setUpdatedText] = useState("");
     const [isVisible, setVisibility] = useState(false);
     const router = useRouter();
-    const {getToken, userId } = useAuth()
+    const {getToken, userId, isLoaded } = useAuth()
 
     useEffect(() => {
-        if (!userId) {
-            router.push("/");
-          }
-    }, [])
+        if(isLoaded) {
+            if (!userId) {
+                router.push("/");
+            }
+        }
+    }, [isLoaded])
 
     useEffect(() => {
         //router.isReady prevents query from being undefined on page reload
