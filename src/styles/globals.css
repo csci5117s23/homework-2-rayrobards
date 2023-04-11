@@ -174,4 +174,15 @@ body {
   font-size: 2rem;
 }
 
+.page404 {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.page404Content {
+  font-size: 3rem;
+}
+
 

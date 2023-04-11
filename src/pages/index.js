@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { Inter } from 'next/font/google'
 // import styles from '@/styles/Home.module.css'
 import styles from '@/styles/TodoApp.module.css'
-import Link from 'next/link'
 import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
 import { useAuth } from "@clerk/nextjs";
