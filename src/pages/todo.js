@@ -102,14 +102,16 @@ export default function TodoItem() {
             {editing && (
                 <>
                     <div className="editCategory">
-                        <div className="pure-form pure-form-stacked editCategoryContent">
-                            <select id="multi-state" className="pure-input-1-2" onChange={(e) => updateCategory(e.target.value)}>
-                            {categoryList.map(category => (
-                                category.name === todoItem.category
-                                    ? <option value={category.name} selected>{category.name}</option>
-                                    : <option value={category.name}>{category.name}</option>
-                            ))}
-                            </select>
+                        <div className="test">
+                            <div className="pure-form pure-form-stacked editCategoryContent">
+                                <select title="change category" id="multi-state" className="pure-input-1-2" onChange={(e) => updateCategory(e.target.value)}>
+                                {categoryList.map(category => (
+                                    category.name === todoItem.category
+                                        ? <option value={category.name} selected>{category.name}</option>
+                                        : <option value={category.name}>{category.name}</option>
+                                ))}
+                                </select>
+                            </div>
                         </div>
                     </div>
                     <div className="editText">

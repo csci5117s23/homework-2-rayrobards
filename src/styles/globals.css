@@ -159,16 +159,18 @@ body {
   justify-content: flex-end;
 }
 
-.editCategoryContent {
-  /* background-color: red;
-  padding-top: .8rem;
-  padding-bottom: .8rem;
+.test {
+  background-color: red;
+  padding-top: .55rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
   color: white;
   margin-right: 2rem;
-  font-size: 2rem; */
-  width:30%
+  font-size: 1.2rem;
+}
+
+.editCategoryContent {
+  width: 200%;
 }
 
 .editText {
