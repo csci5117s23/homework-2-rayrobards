@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 import { useAuth } from "@clerk/nextjs";
 import Link from "next/link";
 
-export default function CategoryList() 
+export default function CategoryList(status) 
 {
     const [categoryList, setCategories] = useState([]);
     const [newCategory, setNewCategory] = useState("");
@@ -23,7 +23,7 @@ export default function CategoryList()
                 setLoading(false);
         }
         loadData();
-    });
+    }, [categoryList]);
 
 
     function toggleCategoryInput() {
@@ -38,7 +38,10 @@ export default function CategoryList()
             "name": newCategory,
         }
         const token = await getToken({template: "codehooks"});
-        await addTodoCategory(token, userCategory)
+        if(!categoryList.includes(newCategory))
+        {
+            await addTodoCategory(token, userCategory);
+        }
     }
 
     if(loading)
@@ -47,6 +50,8 @@ export default function CategoryList()
             <span>loading....</span>
         )
    }
+
+//    console.log("status: " + status.status)
 
     return (
         <div className="categoriesList">
@@ -57,14 +62,19 @@ export default function CategoryList()
                         <ul className="pure-menu-children dropdown">
                         {categoryList.length > 0 && (<div className="pure-menu pure-menu-scrollable custom-restricted testing">
                                 <ul className="pure-menu-list">
-                                    <li className="pure-menu-item">
+                                <li className="pure-menu-item">
                                         <Link href="/todos" className="pure-menu-link">
+                                            <span className="categoryText">All</span>
+                                        </Link>
+                                    </li>
+                                    <li className="pure-menu-item">
+                                        <Link href="/todos/category?=''" className="pure-menu-link">
                                             <span className="categoryText">Not in Category</span>
                                         </Link>
                                     </li>
                                     {categoryList.map(category => (
                                         <li className="pure-menu-item">
-                                            <Category category={category}/>
+                                            <Category category={category} status={"TODOS"}/>
                                         </li>
                                     ))}
                                 </ul>

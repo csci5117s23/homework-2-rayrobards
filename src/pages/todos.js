@@ -33,7 +33,6 @@ export default function TodoPage() {
         }
         loadData();
     }, [todoList, isLoaded]);
-    //TODO; if i mount this, wont reset state when components state changes, bad practice?
 
     async function addItem()
     {
@@ -69,7 +68,7 @@ export default function TodoPage() {
                     <PageHeader pageTitle="TODO" />
                 </div>
                 <div>
-                    <CategoryList/>
+                    <CategoryList status={"todos"}/>
                 </div>
                 <div className="todoItems">
                     <div>

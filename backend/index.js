@@ -32,6 +32,15 @@ async function changeStatus(req, res) {
     res.json(data);
 }
 
+app.delete('/deleteCategory', deleteCategory)
+
+async function deleteCategory(req, res)
+{
+    const db = await Datastore.open();
+    const data = await db.removeOne('categories', req.query._id);
+    res.json(data)
+}
+
 // Use Crudlify to create a REST API for any collection
 crudlify(app, {users: userYup, todos: todoItemYup, categories: categoryYup})
 

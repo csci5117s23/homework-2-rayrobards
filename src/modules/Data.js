@@ -83,3 +83,11 @@ export async function addTodoCategory(authToken, category) {
     });
     return await response;
 }
+
+export async function deleteTodoCategory(authToken, categoryId) {
+    const response = await fetch(`${BASEURL}/deleteCategory?_id=${categoryId}`, {
+        method: "DELETE",
+        'headers': {'Authorization': 'Bearer ' + authToken}
+    });
+    return await response;
+}

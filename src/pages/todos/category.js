@@ -35,7 +35,6 @@ export default function TodoCategoryPage() {
             loadData();
         }
     }, [todoList, isLoaded, router.isReady]);
-    //TODO; if i mount this, wont reset state when components state changes, bad practice?
 
     async function addItem()
     {
@@ -68,12 +67,22 @@ export default function TodoCategoryPage() {
             </Head>
             <div className='todoPageContainer'>
                 <div>
-                    <PageHeader pageTitle={`TODOS: ${category}`} />
+                    <PageHeader pageTitle={`TODOS`} />
                 </div>
                 <div>
-                    <CategoryList/>
+                    <CategoryList status={"todos"}/>
                 </div>
                 <div className="todoItems">
+                    {category && (
+                        <div>
+                            <span>{`Category: ${category}`}</span>
+                        </div>
+                    )}
+                    {!category && (
+                        <div>
+                            <span>Category: Without Category</span>
+                        </div>
+                    )}
                     <div>
                         {todoList.map(todos => (
                             <TodoItem key={todos.id} item={todos}></TodoItem>
