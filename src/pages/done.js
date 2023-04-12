@@ -36,7 +36,12 @@ export default function DonePage() {
     if(loading)
     {
         return (
-            <span>loading....</span>
+            <>
+                <div>
+                    <PageHeader pageTitle={`Done`} />
+                </div>
+                <span>loading....</span>
+            </>
         )
     }
     return (

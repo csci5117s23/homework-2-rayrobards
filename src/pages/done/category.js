@@ -7,6 +7,7 @@ import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import { Caesar_Dressing } from "next/font/google";
 import CategoryList from "@/components/categoryList";
+import NoData from "@/components/noData";
 
 export default function DoneCategoryPage() {
     const router = useRouter();
@@ -39,7 +40,12 @@ export default function DoneCategoryPage() {
    if(loading)
    {
         return (
-            <span>loading....</span>
+            <>
+                <div>
+                    <PageHeader pageTitle={`Done`} />
+                </div>
+                <span>loading....</span>
+            </>
         )
    }
 
@@ -68,6 +74,9 @@ export default function DoneCategoryPage() {
                         <div>
                             <span>Category: Without Category</span>
                         </div>
+                    )}
+                    {todoList.length === 0 && (
+                        <NoData />
                     )}
                     <div>
                         {todoList.map(todos => (
