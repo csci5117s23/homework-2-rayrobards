@@ -7,6 +7,8 @@ import { updateTodoItem, getTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { TailSpin } from 'react-loading-icons'
 import PageHeader from "@/components/header";
+import { getCategories } from "@/modules/Data";
+
 export default function TodoItem() {
     const [editing, setEditing] = useState(false);
     const [todoItem, setTodoItem] = useState({});
@@ -14,6 +16,8 @@ export default function TodoItem() {
     const [saveLoading, setSaveLoading] = useState(false);
     const [updatedText, setUpdatedText] = useState("");
     const [isVisible, setVisibility] = useState(false);
+    const [categoryList, setCategories] = useState([]);
+    const [updatedCategory, updateCategory] = useState("");
     const router = useRouter();
     const {getToken, userId, isLoaded } = useAuth()
 
@@ -35,12 +39,14 @@ export default function TodoItem() {
             async function getItem() {
                 const token = await getToken({template: "codehooks"});
                 let data = await getTodoItem(token, id);
+                let categories = await getCategories(token, userId);
                 setTodoItem(data[0]);
+                setCategories(categories);
                 setLoading(false);
             }
             getItem();
         }
-    }, [router.isReady])
+    }, [router.isReady, categoryList])
 
     function toggleEditing() {
         setEditing(!editing)
@@ -50,12 +56,11 @@ export default function TodoItem() {
         const update = {
             "status": todoItem.status,
             "createdOn": todoItem.createdOn,
-            "category": todoItem.category,
+            "category": updatedCategory,
             "text": updatedText,
             "userId": todoItem.userId,
             "_id": todoItem._id
         }
-
         const token = await getToken({template: "codehooks"});
         setSaveLoading(true);
         await updateTodoItem(token,todoItem._id, update);
@@ -85,14 +90,32 @@ export default function TodoItem() {
                     <PageHeader pageTitle="EDIT PAGE" />
                 </div>
             {!editing && (
-                <div className="nonEditText">
-                    <p>{todoItem.text}</p>
-                </div>
+                <>
+                    <div className="nonEditCategory">
+                        <div className="nonEditCategoryContent">{todoItem.category}</div>
+                    </div>
+                    <div className="nonEditText">
+                        <p>{todoItem.text}</p>
+                    </div>
+                </>
             )}
             {editing && (
-                <div className="editText">
-                    <textarea className="todoItemTextInput" placeholder="todo item description" onChange={(e) => setUpdatedText(e.target.value)}>{todoItem.text}</textarea>
-                </div>
+                <>
+                    <div className="editCategory">
+                        <div className="pure-form pure-form-stacked editCategoryContent">
+                            <select id="multi-state" className="pure-input-1-2" onChange={(e) => updateCategory(e.target.value)}>
+                            {categoryList.map(category => (
+                                category.name === todoItem.category
+                                    ? <option value={category.name} selected>{category.name}</option>
+                                    : <option value={category.name}>{category.name}</option>
+                            ))}
+                            </select>
+                        </div>
+                    </div>
+                    <div className="editText">
+                        <textarea className="todoItemTextInput" placeholder="todo item description" onChange={(e) => setUpdatedText(e.target.value)}>{todoItem.text}</textarea>
+                    </div>
+                </>
             )}
             <div className="todoItemButtonsContainer">
                 <button className="todoItemButton" title="Back to todos" onClick={() => router.back()}>

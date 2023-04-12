@@ -123,7 +123,6 @@ body {
 }
 
 .nonEditText {
-  margin-top: 3rem;
   width: 50%;
   min-height: 50%;
   background-color: aliceblue;
@@ -133,8 +132,46 @@ body {
   font-size: 1.2rem;
 }
 
-.editText {
+.nonEditCategory
+{
+  display: flex;
+  width: 50%;
   margin-top: 3rem;
+  justify-content: flex-end;
+}
+
+.nonEditCategoryContent {
+  background-color: cornflowerblue;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  color: white;
+  margin-right: 2rem;
+  font-size: 2rem;
+}
+
+.editCategory
+{
+  display: flex;
+  width: 50%;
+  margin-top: 3rem;
+  justify-content: flex-end;
+}
+
+.editCategoryContent {
+  /* background-color: red;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  color: white;
+  margin-right: 2rem;
+  font-size: 2rem; */
+  width:30%
+}
+
+.editText {
   width: 50%;
   min-height: 50%;
   background-color: aliceblue;
@@ -149,7 +186,7 @@ body {
   resize: none;
   background-color: aliceblue;
   font-family: 'Times New Roman', Times, serif;
-  font-size: 1.2rem;
+  font-size: 1.35rem;
   padding-top: 1.2rem;
   border: 0px;
   outline: none;
