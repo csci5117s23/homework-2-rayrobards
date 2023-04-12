@@ -16,9 +16,9 @@ export default function PageHeader(pageTitle)
 
     return (
         <div className="pure-g pageHeader">
-            <div class="pure-u-1-3"></div>
-            <div class="pure-u-1-3 titleContainer"><span>{pageTitle.pageTitle}</span></div>
-            <div class="pure-u-1-3 signOutButtonContainer">
+            <div className="pure-u-1-3"></div>
+            <div className="pure-u-1-3 titleContainer"><span>{pageTitle.pageTitle}</span></div>
+            <div className="pure-u-1-3 signOutButtonContainer">
                 <button className="signOutButton" title="sign out" onClick={userSignOut}>
                     <FontAwesomeIcon icon={faRightFromBracket} className="signOutIcon"></FontAwesomeIcon>
                 </button>

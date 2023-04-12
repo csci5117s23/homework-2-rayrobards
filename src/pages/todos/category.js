@@ -2,18 +2,18 @@ import {useEffect, useState} from "react";
 import TodoItem from "@/components/todoItem";
 import PageHeader from "@/components/header";
 import Head from 'next/head'
-import { getTodoItems, addTodoItem} from "@/modules/Data";
+import { getTodoItems, addTodoItem, getTodoItemsCategory } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import CategoryList from "@/components/categoryList";
+import { Caesar_Dressing } from "next/font/google";
 
-export default function TodoPage() {
+export default function TodoCategoryPage() {
     const router = useRouter();
-
     const [todoList, setTodoList] = useState([]);
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+    const [category, setCategory] = useState("");
     useEffect(() => {
         if(isLoaded) {
             if (!userId) {
@@ -23,16 +23,17 @@ export default function TodoPage() {
     }, [isLoaded])
 
     useEffect(()=>{
-        async function loadData() {
-            if(userId) {
-                const token = await getToken({template: "codehooks"});
-                let data = await getTodoItems(token, userId);
-                setTodoList(data);
-                setLoading(false);
+        if(router.isReady) {
+            setCategory(router.query.category);
+            async function loadData() {
+                    const token = await getToken({template: "codehooks"});
+                    let data = await getTodoItemsCategory(token, userId, category);
+                    setTodoList(data)
+                    setLoading(false);
             }
+            loadData();
         }
-        loadData();
-    }, [todoList, isLoaded]);
+    }, [todoList, isLoaded, router.isReady]);
     //TODO; if i mount this, wont reset state when components state changes, bad practice?
 
     async function addItem()
@@ -40,7 +41,7 @@ export default function TodoPage() {
         const todoItem = {
             "userId": userId, 
             "text": newItem, 
-            "category": ""
+            "category": category
         }
         const updatedTodoList = [todoItem, ...todoList];
         setTodoList(updatedTodoList);
@@ -66,10 +67,7 @@ export default function TodoPage() {
             </Head>
             <div className='todoPageContainer'>
                 <div>
-                    <PageHeader pageTitle="TODO" />
-                </div>
-                <div>
-                    <CategoryList/>
+                    <PageHeader pageTitle={`TODOS: ${category}`} />
                 </div>
                 <div className="todoItems">
                     <div>
@@ -80,7 +78,7 @@ export default function TodoPage() {
                 </div>
                 <div className="addTodoItem">
                     <textarea className="textBox" placeholder="Enter new todo item description here." onChange={(e) => setNewItem(e.target.value)}/>
-                    <button className="addItemButton" onClick={addItem}>Add new Todo item</button>
+                    <button className="addItemButton" onClick={addItem}>{`Add new Todo Item to ${category}`}</button>
                 </div>
             </div>
         </>

@@ -56,3 +56,30 @@ export async function getTodoItem(authToken, todoId) {
     });
     return await response.json();
 }
+
+//get todoItems by category
+export async function getTodoItemsCategory(authToken, userId, category) {
+    const response = await fetch(`${BASEURL}/todos?userId=${userId}&status=${false}&category=${category}&sort=-createdOn`, {
+        method: "GET",
+        'headers': {'Authorization': 'Bearer ' + authToken}
+    });
+    return await response.json();
+}
+
+//get all categories
+export async function getCategories(authToken, userId) {
+    const response = await fetch(`${BASEURL}/categories?userId=${userId}`, {
+        method: "GET",
+        'headers': {'Authorization': 'Bearer ' + authToken}
+    });
+    return await response.json();
+}
+
+export async function addTodoCategory(authToken, category) {
+    const response = await fetch(`${BASEURL}/categories`, {
+        method: "POST",
+        headers: { 'Authorization': 'Bearer ' + authToken, "Content-Type": "application/json"},
+        body: JSON.stringify(category)
+    });
+    return await response;
+}

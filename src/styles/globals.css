@@ -207,4 +207,81 @@ body {
   font-size: 3rem;
 }
 
+.custom-restricted {
+  height: 160px;
+  width: 30vw;
+}
+
+.categoryContainer {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.dropdown {
+  border: .3rem solid black;
+  border-radius: .4rem;
+}
+
+.categoryContainerLast {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  background-color: cornflowerblue;
+  text-align: end;
+}
+
+.categoryContainerLast span {
+  color: white;
+}
+
+.addNewCategoryContainer {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.categoryTextInput {
+  display: flex;
+}
+
+.deleteCatButton {
+  height: 100%;
+  width: 10%;
+  background-color: transparent;
+  border: none;
+  margin-left: auto;
+}
+
+.categoryIcon {
+  height: 100%;
+  width: auto;
+}
+
+.categoryIcon:hover {
+  color: red;
+  cursor: pointer;
+}
+
+.categoryDropDown {
+  font-size: 2rem;
+}
+
+.categoryText {
+  font-size: 1.5rem;
+}
+
+.testing {
+  background-color: white
+}
+
+.catToggleButton {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.catToggleButton:hover {
+  cursor: pointer;
+}
 

@@ -21,6 +21,11 @@ const userYup = object({
 
 app.put('/updateTodoItem', changeStatus)
 
+const categoryYup = object({
+    userId: string().required(),
+    name: string().required(),
+})
+
 async function changeStatus(req, res) {
     const db = await Datastore.open();
     const data = await db.updateOne('todos', req.query._id, req.body);
@@ -28,7 +33,7 @@ async function changeStatus(req, res) {
 }
 
 // Use Crudlify to create a REST API for any collection
-crudlify(app, {users: userYup, todos: todoItemYup})
+crudlify(app, {users: userYup, todos: todoItemYup, categories: categoryYup})
 
 // bind to serverless runtime
 export default app.init();
