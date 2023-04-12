@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { updateTodoItem, getTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { TailSpin } from 'react-loading-icons'
+import PageHeader from "@/components/header";
 export default function TodoItem() {
     const [editing, setEditing] = useState(false);
     const [todoItem, setTodoItem] = useState({});
@@ -80,9 +81,9 @@ export default function TodoItem() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
         <div className="todoItemPageContainer">
-            <div className="pageHeader">
-                <span>Edit Page</span>
-            </div>
+                <div>
+                    <PageHeader pageTitle="EDIT PAGE" />
+                </div>
             {!editing && (
                 <div className="nonEditText">
                     <p>{todoItem.text}</p>

@@ -57,18 +57,36 @@ body {
 }
 
 .pageHeader {
-  display: flex;
   width: 100vw;
   height: 10vh;
   background-color: lightblue;
-  justify-content: center;
   align-items: center;
   font-size: 3rem;
   color: white;
 }
 
-.pageHeader .userIcon {
-  float: right;
+.titleContainer
+{
+  text-align: center;
+}
+
+.signOutButtonContainer {
+  height: 100%;
+  text-align: end;
+}
+
+.signOutButton {
+  height: 100%;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+  margin-right: 1.5rem;
+}
+
+.signOutIcon {
+  height: 60%;
+  width: auto;
+  color: white;
 }
 
 .textBox {

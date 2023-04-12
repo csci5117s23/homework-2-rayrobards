@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import TodoItem from "@/components/todoItem";
+import PageHeader from "@/components/header";
 import Head from 'next/head'
 import { getDoneTodoItems } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
@@ -46,9 +47,9 @@ export default function DonePage() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <div className="donePageContainer">
-            <div className="pageHeader">
-                        <span>DONE</span>
-                </div>
+                <div>
+                    <PageHeader pageTitle="DONE" />
+                </div>          
                 <div className="todoItems">
                     <div>
                         {todoList.map(todos => (
