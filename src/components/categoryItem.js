@@ -11,16 +11,16 @@ export default function Category(props)
     async function deleteCategory()
     {
         const token = await getToken({template: "codehooks"});
-        await deleteTodoCategory(token, data._id)
+        await deleteTodoCategory(token, category._id)
     }
-    console.log("item: ")
-    console.log(status);
-    let data = category.category
+    //console.log("item: ")
+    //console.log(status);
+    //let data = category.category
     return (
         <div className="categoryContainer">
-            <Link href={`/${status.status}/category?category=${data.name}`} className="pure-menu-link">
+            <Link href={`/${status}/category?category=${category.name}`} className="pure-menu-link">
                 <div >
-                    <span className="categoryText">{data.name}</span>
+                    <span className="categoryText">{category.name}</span>
                 </div>
             </Link>
             <button className="deleteCatButton" onClick={deleteCategory}>

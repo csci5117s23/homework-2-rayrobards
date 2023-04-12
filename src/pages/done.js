@@ -5,6 +5,7 @@ import Head from 'next/head'
 import { getDoneTodoItems } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
+import CategoryList from "@/components/categoryList";
 
 export default function DonePage() {
     const [todoList, setTodoList] = useState([]);
@@ -49,7 +50,10 @@ export default function DonePage() {
             <div className="donePageContainer">
                 <div>
                     <PageHeader pageTitle="DONE" />
-                </div>          
+                </div>  
+                <div>
+                    <CategoryList status={"done"}/>
+                </div>        
                 <div className="todoItems">
                     <div>
                         {todoList.map(todos => (

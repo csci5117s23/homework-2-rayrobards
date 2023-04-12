@@ -62,19 +62,37 @@ export default function CategoryList(status)
                         <ul className="pure-menu-children dropdown">
                         {categoryList.length > 0 && (<div className="pure-menu pure-menu-scrollable custom-restricted testing">
                                 <ul className="pure-menu-list">
-                                <li className="pure-menu-item">
-                                        <Link href="/todos" className="pure-menu-link">
-                                            <span className="categoryText">All</span>
-                                        </Link>
-                                    </li>
-                                    <li className="pure-menu-item">
-                                        <Link href="/todos/category?=''" className="pure-menu-link">
-                                            <span className="categoryText">Not in Category</span>
-                                        </Link>
-                                    </li>
+                                    {status.status === 'todos' && (
+                                        <>
+                                            <li className="pure-menu-item">
+                                                <Link href="/todos" className="pure-menu-link">
+                                                    <span className="categoryText">All</span>
+                                                </Link>
+                                            </li>
+                                            <li className="pure-menu-item">
+                                                <Link href="/todos/category?=''" className="pure-menu-link">
+                                                    <span className="categoryText">Not in Category</span>
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )}
+                                    {status.status === 'done' && (
+                                        <>
+                                            <li className="pure-menu-item">
+                                                <Link href="/done" className="pure-menu-link">
+                                                    <span className="categoryText">All</span>
+                                                </Link>
+                                            </li>
+                                            <li className="pure-menu-item">
+                                                <Link href="/done/category?=''" className="pure-menu-link">
+                                                    <span className="categoryText">Not in Category</span>
+                                                </Link>
+                                            </li>
+                                        </>
+                                    )}
                                     {categoryList.map(category => (
                                         <li className="pure-menu-item">
-                                            <Category category={category} status={"TODOS"}/>
+                                            <Category category={category} status={status.status}/>
                                         </li>
                                     ))}
                                 </ul>
