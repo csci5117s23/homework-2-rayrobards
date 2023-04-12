@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCategories, addTodoCategory } from "@/modules/Data";
 import {useEffect, useState} from "react";
 import { useAuth } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function CategoryList() 
 {
@@ -11,14 +12,15 @@ export default function CategoryList()
     const [newCategory, setNewCategory] = useState("");
     const [categoryText, setCategoryText] = useState(false);
     const { isLoaded, userId, getToken } = useAuth();
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
 
     useEffect(()=>{
         async function loadData() {
                 const token = await getToken({template: "codehooks"});
                 let categories = await getCategories(token, userId);
-                setCategories(categories)
+                setCategories(categories);
+                setLoading(false);
         }
         loadData();
     });
@@ -39,6 +41,13 @@ export default function CategoryList()
         await addTodoCategory(token, userCategory)
     }
 
+    if(loading)
+   {
+        return (
+            <span>loading....</span>
+        )
+   }
+
     return (
         <div className="categoriesList">
             <div className="pure-menu pure-menu-horizontal ">
@@ -48,8 +57,15 @@ export default function CategoryList()
                         <ul className="pure-menu-children dropdown">
                         {categoryList.length > 0 && (<div className="pure-menu pure-menu-scrollable custom-restricted testing">
                                 <ul className="pure-menu-list">
+                                    <li className="pure-menu-item">
+                                        <Link href="/todos" className="pure-menu-link">
+                                            <span className="categoryText">Not in Category</span>
+                                        </Link>
+                                    </li>
                                     {categoryList.map(category => (
-                                        <Category category={category}/>
+                                        <li className="pure-menu-item">
+                                            <Category category={category}/>
+                                        </li>
                                     ))}
                                 </ul>
                             </div>)}

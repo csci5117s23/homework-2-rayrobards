@@ -6,6 +6,7 @@ import { getTodoItems, addTodoItem, getTodoItemsCategory } from "@/modules/Data"
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import { Caesar_Dressing } from "next/font/google";
+import CategoryList from "@/components/categoryList";
 
 export default function TodoCategoryPage() {
     const router = useRouter();
@@ -68,6 +69,9 @@ export default function TodoCategoryPage() {
             <div className='todoPageContainer'>
                 <div>
                     <PageHeader pageTitle={`TODOS: ${category}`} />
+                </div>
+                <div>
+                    <CategoryList/>
                 </div>
                 <div className="todoItems">
                     <div>
