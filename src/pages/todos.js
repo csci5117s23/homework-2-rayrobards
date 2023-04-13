@@ -6,6 +6,7 @@ import { getTodoItems, addTodoItem} from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import CategoryList from "@/components/categoryList";
+import NoData from "@/components/noData";
 
 export default function TodoPage() {
     const router = useRouter();
@@ -76,6 +77,9 @@ export default function TodoPage() {
                 <div>
                     <CategoryList status={"todos"}/>
                 </div>
+                {todoList.length === 0 && (
+                        <NoData />
+                )}   
                 <div className="todoItems">
                     <div>
                         {todoList.map(todos => (

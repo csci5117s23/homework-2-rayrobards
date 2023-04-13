@@ -6,6 +6,7 @@ import { getDoneTodoItems } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
 import CategoryList from "@/components/categoryList";
+import NoData from "@/components/noData";
 
 export default function DonePage() {
     const [todoList, setTodoList] = useState([]);
@@ -59,7 +60,10 @@ export default function DonePage() {
                 </div>  
                 <div>
                     <CategoryList status={"done"}/>
-                </div>        
+                </div>  
+                {todoList.length === 0 && (
+                        <NoData />
+                )}     
                 <div className="todoItems">
                     <div>
                         {todoList.map(todos => (
