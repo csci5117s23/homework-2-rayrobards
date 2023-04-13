@@ -38,7 +38,7 @@ export default function DonePage() {
         return (
             <>
                 <div>
-                    <PageHeader pageTitle={`Done`} />
+                    <PageHeader pageTitle={`DONE`} />
                 </div>
                 <span>loading....</span>
             </>

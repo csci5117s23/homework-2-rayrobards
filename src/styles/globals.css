@@ -3,6 +3,8 @@ body {
   padding: 0;
 }
 
+/* todo page */
+
 .todoPageContainer, .donePageContainer {
   display: flex;
   justify-content: center;
@@ -31,6 +33,43 @@ body {
   overflow: hidden;
 }
 
+.addTodoItem {
+  display: flex;
+  flex-direction: column;
+  margin: 2.5rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: lightblue;
+  align-items: center;
+}
+
+.textBox {
+  width: 30vw;
+  min-width: 30vw;
+  height: 10vh;
+  min-height: 10vh;
+  border-radius: 1rem;
+  padding:1rem;
+  font-size: 1rem;
+}
+
+.addItemButton {
+  margin-top: .5rem;
+  min-width: 50%;
+  background-color: aliceblue;
+  border: none;
+  min-height: 2rem;
+  border-radius: .5rem;
+  font-size: 1rem;
+}
+
+.addItemButton:hover{
+  cursor: pointer;
+  background-color: cornflowerblue;
+}
+
+/* todo component */
+
 .statusCircleButton { 
   width: 3rem;
   min-width: 3rem;
@@ -46,15 +85,7 @@ body {
   color: cornflowerblue;
 }
 
-.addTodoItem {
-  display: flex;
-  flex-direction: column;
-  margin: 2.5rem;
-  padding: 2rem;
-  border-radius: 1rem;
-  background-color: lightblue;
-  align-items: center;
-}
+/* header component */
 
 .pageHeader {
   width: 100vw;
@@ -101,30 +132,7 @@ body {
   color: white;
 }
 
-.textBox {
-  width: 30vw;
-  min-width: 30vw;
-  height: 10vh;
-  min-height: 10vh;
-  border-radius: 1rem;
-  padding:1rem;
-  font-size: 1rem;
-}
-
-.addItemButton {
-  margin-top: .5rem;
-  width: 50%;
-  background-color: aliceblue;
-  border: none;
-  height: 2rem;
-  border-radius: .5rem;
-  font-size: 1rem;
-}
-
-.addItemButton:hover{
-  cursor: pointer;
-  background-color: cornflowerblue;
-}
+/* todo item page */
 
 .todoItemPageContainer {
   display: flex;
@@ -171,7 +179,7 @@ body {
   justify-content: flex-end;
 }
 
-.test {
+.editDropdownContainer {
   background-color: red;
   padding-top: .55rem;
   padding-left: 1.5rem;
@@ -247,6 +255,8 @@ body {
   font-size: 2rem;
 }
 
+/* 404 page */
+
 .page404 {
   display: flex;
   width: 100vw;
@@ -257,6 +267,8 @@ body {
 .page404Content {
   font-size: 3rem;
 }
+
+/* category dropdown component */
 
 .custom-restricted {
   height: 160px;
@@ -322,10 +334,6 @@ body {
   font-size: 1.5rem;
 }
 
-.testing {
-  background-color: white
-}
-
 .catToggleButton {
   background-color: transparent;
   border: none;
@@ -338,8 +346,6 @@ body {
 
 .categoryHeader {
   width: 80vw;
-  /* display: flex; */
-  /* justify-content: flex-start; */
 }
 
 .categoryHeader span{
@@ -361,6 +367,8 @@ body {
 .noCategoryItems span {
   font-size: 3rem;
 }
+
+/* home page */
 
 .titlePage {
   display: flex;

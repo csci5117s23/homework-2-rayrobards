@@ -14,6 +14,7 @@ export default function TodoPage() {
     const [newItem, setNewItem] = useState("");
     const [loading, setLoading] = useState(true);
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+
     useEffect(() => {
         if(isLoaded) {
             if (!userId) {
@@ -24,12 +25,10 @@ export default function TodoPage() {
 
     useEffect(()=>{
         async function loadData() {
-            if(userId) {
-                const token = await getToken({template: "codehooks"});
-                let data = await getTodoItems(token, userId);
-                setTodoList(data);
-                setLoading(false);
-            }
+            const token = await getToken({template: "codehooks"});
+            let data = await getTodoItems(token, userId);
+            setTodoList(data);
+            setLoading(false);
         }
         loadData();
     }, [todoList, isLoaded]);
@@ -41,6 +40,8 @@ export default function TodoPage() {
             "text": newItem, 
             "category": "none"
         }
+
+        //add item to front of todo list
         const updatedTodoList = [todoItem, ...todoList];
         setTodoList(updatedTodoList);
         setNewItem("");
@@ -53,7 +54,7 @@ export default function TodoPage() {
         return (
             <>
                 <div>
-                    <PageHeader pageTitle={`Done`} />
+                    <PageHeader pageTitle={`TODO`} />
                 </div>
                 <span>loading....</span>
             </>

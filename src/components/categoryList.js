@@ -59,7 +59,7 @@ export default function CategoryList(status)
                         <a href="#" id="menuLink1" className="pure-menu-link categoryDropDown">Categories</a>
                         <ul className="pure-menu-children dropdown">
                         {categoryList.length > 0 && (
-                            <div className="pure-menu pure-menu-scrollable custom-restricted testing">
+                            <div className="pure-menu pure-menu-scrollable custom-restricted">
                                 <ul className="pure-menu-list">
                                     {status.status === 'todos' && (
                                         <>
