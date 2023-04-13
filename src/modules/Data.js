@@ -75,6 +75,7 @@ export async function getCategories(authToken, userId) {
     return await response.json();
 }
 
+//add new todo item category
 export async function addTodoCategory(authToken, category) {
     const response = await fetch(`${BASEURL}/categories`, {
         method: "POST",
@@ -84,6 +85,7 @@ export async function addTodoCategory(authToken, category) {
     return await response;
 }
 
+//delete todo item category
 export async function deleteTodoCategory(authToken, categoryId) {
     const response = await fetch(`${BASEURL}/deleteCategory?_id=${categoryId}`, {
         method: "DELETE",

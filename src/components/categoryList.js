@@ -17,10 +17,10 @@ export default function CategoryList(status)
 
     useEffect(()=>{
         async function loadData() {
-                const token = await getToken({template: "codehooks"});
-                let categories = await getCategories(token, userId);
-                setCategories(categories);
-                setLoading(false);
+            const token = await getToken({template: "codehooks"});
+            let categories = await getCategories(token, userId);
+            setCategories(categories);
+            setLoading(false);
         }
         loadData();
     }, [categoryList]);
@@ -45,13 +45,11 @@ export default function CategoryList(status)
     }
 
     if(loading)
-   {
+    {
         return (
             <span>loading....</span>
         )
-   }
-
-//    console.log("status: " + status.status)
+    }
 
     return (
         <div className="categoriesList">
@@ -60,7 +58,8 @@ export default function CategoryList(status)
                     <li className="pure-menu-item pure-menu-has-children pure-menu-allow-hover">
                         <a href="#" id="menuLink1" className="pure-menu-link categoryDropDown">Categories</a>
                         <ul className="pure-menu-children dropdown">
-                        {categoryList.length > 0 && (<div className="pure-menu pure-menu-scrollable custom-restricted testing">
+                        {categoryList.length > 0 && (
+                            <div className="pure-menu pure-menu-scrollable custom-restricted testing">
                                 <ul className="pure-menu-list">
                                     {status.status === 'todos' && (
                                         <>

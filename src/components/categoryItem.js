@@ -13,9 +13,6 @@ export default function Category(props)
         const token = await getToken({template: "codehooks"});
         await deleteTodoCategory(token, category._id)
     }
-    //console.log("item: ")
-    //console.log(status);
-    //let data = category.category
     return (
         <div className="categoryContainer">
             <Link href={`/${status}/category?category=${category.name}`} className="pure-menu-link">
@@ -24,7 +21,7 @@ export default function Category(props)
                 </div>
             </Link>
             <button className="deleteCatButton" onClick={deleteCategory}>
-                    <FontAwesomeIcon title="delete category" className="categoryIcon" icon={deleteIcon}/>
+                <FontAwesomeIcon title="delete category" className="categoryIcon" icon={deleteIcon}/>
             </button>
         </div>
     )

@@ -28,10 +28,10 @@ export default function TodoCategoryPage() {
             setCategory(router.query.category);
             console.log(category)
             async function loadData() {
-                    const token = await getToken({template: "codehooks"});
-                    let data = await getTodoItemsCategory(token, userId, category);
-                    setTodoList(data)
-                    setLoading(false);
+                const token = await getToken({template: "codehooks"});
+                let data = await getTodoItemsCategory(token, userId, category);
+                setTodoList(data)
+                setLoading(false);
             }
             loadData();
         }

@@ -3,15 +3,7 @@ import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
 import { useAuth } from "@clerk/nextjs";
 import { addUser } from '@/modules/Data'
-import {
-  // ClerkProvider,
-  SignedIn,
-  SignedOut,
-  UserButton,
-  useUser,
-  RedirectToSignIn,
-  useSession,
-} from "@clerk/clerk-react";
+import { SignedIn, SignedOut, useUser, RedirectToSignIn } from "@clerk/clerk-react";
 
 export default function Home() {
   let router = useRouter()
