@@ -65,6 +65,18 @@ body {
   color: white;
 }
 
+.headerButtons button{
+  background-color: transparent;
+  color: white;
+  border: 0px;
+  font-size: 2rem;
+}
+
+.headerButtons button:hover{
+  color: cornflowerblue;
+  cursor: pointer;
+}
+
 .titleContainer
 {
   text-align: center;
@@ -322,5 +334,64 @@ body {
 
 .catToggleButton:hover {
   cursor: pointer;
+}
+
+.categoryHeader {
+  width: 80vw;
+  /* display: flex; */
+  /* justify-content: flex-start; */
+}
+
+.categoryHeader span{
+  background-color: cornflowerblue;
+  color: white;
+  padding: 1rem;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+
+.noCategoryItems {
+  display: flex;
+  width: 100%;
+  height: 50vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.noCategoryItems span {
+  font-size: 3rem;
+}
+
+.titlePage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.titlePageContent {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5rem;
+  background-color: cornflowerblue;
+  padding: 2rem;
+  border-radius: 2rem;
+}
+
+.titlePage h1 {
+  font-size: 4rem;
+  color: white;
+}
+
+.titlePage button {
+  padding: 1rem;
+  background-color: white;
+  font-size: 2rem;
+  border: 0px;
+  border-radius: 1rem;
+}
+
+.titlePage button:hover {
+    background-color: lightblue;
+    cursor: pointer;
 }
 

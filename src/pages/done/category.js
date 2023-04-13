@@ -2,10 +2,9 @@ import {useEffect, useState} from "react";
 import TodoItem from "@/components/todoItem";
 import PageHeader from "@/components/header";
 import Head from 'next/head'
-import { getTodoItems, addTodoItem, getTodoItemsCategory } from "@/modules/Data";
+import { getTodoItemsCategory } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import { Caesar_Dressing } from "next/font/google";
 import CategoryList from "@/components/categoryList";
 import NoData from "@/components/noData";
 
@@ -66,13 +65,13 @@ export default function DoneCategoryPage() {
                 </div>
                 <div className="todoItems">
                     {category && (
-                        <div>
+                        <div className="categoryHeader">
                             <span>{`Category: ${category}`}</span>
                         </div>
                     )}
-                    {!category && (
-                        <div>
-                            <span>Category: Without Category</span>
+                     {!category && (
+                        <div className="categoryHeader">
+                            <span>{`Category: None`}</span>
                         </div>
                     )}
                     {todoList.length === 0 && (

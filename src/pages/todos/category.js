@@ -2,11 +2,11 @@ import {useEffect, useState} from "react";
 import TodoItem from "@/components/todoItem";
 import PageHeader from "@/components/header";
 import Head from 'next/head'
-import { getTodoItems, addTodoItem, getTodoItemsCategory } from "@/modules/Data";
+import { addTodoItem, getTodoItemsCategory } from "@/modules/Data";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/router";
-import { Caesar_Dressing } from "next/font/google";
 import CategoryList from "@/components/categoryList";
+import NoData from "@/components/noData";
 
 export default function TodoCategoryPage() {
     const router = useRouter();
@@ -26,6 +26,7 @@ export default function TodoCategoryPage() {
     useEffect(()=>{
         if(router.isReady) {
             setCategory(router.query.category);
+            console.log(category)
             async function loadData() {
                     const token = await getToken({template: "codehooks"});
                     let data = await getTodoItemsCategory(token, userId, category);
@@ -79,14 +80,17 @@ export default function TodoCategoryPage() {
                 </div>
                 <div className="todoItems">
                     {category && (
-                        <div>
+                        <div className="categoryHeader">
                             <span>{`Category: ${category}`}</span>
                         </div>
                     )}
-                    {!category && (
-                        <div>
-                            <span>Category: Without Category</span>
+                     {!category && (
+                        <div className="categoryHeader">
+                            <span>{`Category: None`}</span>
                         </div>
+                    )}
+                     {todoList.length === 0 && (
+                        <NoData />
                     )}
                     <div>
                         {todoList.map(todos => (

@@ -105,6 +105,11 @@ export default function TodoItem() {
                         <div className="test">
                             <div className="pure-form pure-form-stacked editCategoryContent">
                                 <select title="change category" id="multi-state" className="pure-input-1-2" onChange={(e) => updateCategory(e.target.value)}>
+                                   {
+                                    todoItem.category === 'none'
+                                    ? <option value={'none'} selected>{'none'}</option>
+                                    : <option value={'none'}>{'none'}</option>
+                                   }
                                 {categoryList.map(category => (
                                     category.name === todoItem.category
                                         ? <option value={category.name} selected>{category.name}</option>

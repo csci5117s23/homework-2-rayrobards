@@ -1,8 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-// import styles from '@/styles/Home.module.css'
-import styles from '@/styles/TodoApp.module.css'
 import {useEffect, useState} from "react";
 import { useRouter } from 'next/router'
 import { useAuth } from "@clerk/nextjs";
@@ -16,8 +12,6 @@ import {
   RedirectToSignIn,
   useSession,
 } from "@clerk/clerk-react";
-
-// const clerk_pub_key = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
 
 export default function Home() {
   let router = useRouter()
@@ -79,11 +73,15 @@ export default function Home() {
           <Redirect />
         </SignedIn>
         <SignedOut>
-          <h1>Rays todo app</h1>
-          <button onClick={signIn}>Login or Signup</button>
-          {login && (
-            <RedirectToSignIn />
-          )}
+          <div className='titlePage'>
+            <div className='titlePageContent'>
+              <h1>Ray's Todo App</h1>
+              <button onClick={signIn}>Login or Signup</button>
+              {login && (
+                <RedirectToSignIn />
+              )}
+            </div>
+          </div>
         </SignedOut>
     </>
   )

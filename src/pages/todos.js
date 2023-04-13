@@ -39,7 +39,7 @@ export default function TodoPage() {
         const todoItem = {
             "userId": userId, 
             "text": newItem, 
-            "category": ""
+            "category": "none"
         }
         const updatedTodoList = [todoItem, ...todoList];
         setTodoList(updatedTodoList);

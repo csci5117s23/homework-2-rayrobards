@@ -2,8 +2,10 @@
 export default function NoData() {
     return (
         <>
-            <div>
-                <span>No items in Category</span>
+            <div className="noCategoryItems">
+                <div>
+                    <span>No items in Category</span>
+                </div>
             </div>
         </>
     )

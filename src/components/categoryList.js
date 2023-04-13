@@ -70,7 +70,7 @@ export default function CategoryList(status)
                                                 </Link>
                                             </li>
                                             <li className="pure-menu-item">
-                                                <Link href="/todos/category?=''" className="pure-menu-link">
+                                                <Link href="/todos/category?category=none" className="pure-menu-link">
                                                     <span className="categoryText">Not in Category</span>
                                                 </Link>
                                             </li>
@@ -84,7 +84,7 @@ export default function CategoryList(status)
                                                 </Link>
                                             </li>
                                             <li className="pure-menu-item">
-                                                <Link href="/done/category?=''" className="pure-menu-link">
+                                                <Link href="/done/category?category=none" className="pure-menu-link">
                                                     <span className="categoryText">Not in Category</span>
                                                 </Link>
                                             </li>

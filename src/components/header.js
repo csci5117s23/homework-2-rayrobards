@@ -2,6 +2,7 @@ import { useClerk } from "@clerk/clerk-react";
 import { useRouter } from "next/router";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Link from "next/link";
 
 export default function PageHeader(pageTitle) 
 {
@@ -16,7 +17,14 @@ export default function PageHeader(pageTitle)
 
     return (
         <div className="pure-g pageHeader">
-            <div className="pure-u-1-3"></div>
+            <div className="pure-u-1-3 headerButtons">
+                <Link href="/todos">
+                    <button>Todos</button>
+                </Link>
+                <Link href="/done">
+                    <button>Done</button>
+                </Link>
+            </div>
             <div className="pure-u-1-3 titleContainer"><span>{pageTitle.pageTitle}</span></div>
             <div className="pure-u-1-3 signOutButtonContainer">
                 <button className="signOutButton" title="sign out" onClick={userSignOut}>
