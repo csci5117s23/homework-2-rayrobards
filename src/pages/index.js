@@ -10,7 +10,6 @@ export default function Home() {
   const { isLoaded, isSignedIn, user } = useUser();
   const {getToken} = useAuth();
 
-
   const [login, setLogin] = useState(false)
 
   function signIn()
@@ -20,21 +19,6 @@ export default function Home() {
 
   function Redirect() {
       router.push('/todos')
-  }
-
-  async function AddUser()
-  {
-    if(isLoaded)
-    { 
-      //use useuser to get user info such as id, use use auth to get token from clerk
-      const newUser = {
-        "username": user.fullName,
-        "_id":user.id,
-      }
-      const token = await getToken({template: "codehooks"});
-      let res = await addUser(token, newUser);
-      console.log(res);
-    }
   }
 
   function AddUser() {
