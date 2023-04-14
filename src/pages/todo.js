@@ -102,7 +102,7 @@ export default function TodoItem() {
             {editing && (
                 <>
                     <div className="editCategory">
-                        <div className="test">
+                        <div className="editDropdownContainer">
                             <div className="pure-form pure-form-stacked editCategoryContent">
                                 <select title="change category" id="multi-state" className="pure-input-1-2" onChange={(e) => updateCategory(e.target.value)}>
                                    {

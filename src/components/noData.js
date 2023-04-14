@@ -4,7 +4,7 @@ export default function NoData() {
         <>
             <div className="noCategoryItems">
                 <div>
-                    <span>No items in Category</span>
+                    <span>No items found, please add a item</span>
                 </div>
             </div>
         </>

@@ -33,6 +33,7 @@ export default function TodoItem(item) {
         setButtonStyle(unfilledCircle);
     }
     
+    //preview the text if its too long
     let text = data.text;
     if(text === undefined)
     {
